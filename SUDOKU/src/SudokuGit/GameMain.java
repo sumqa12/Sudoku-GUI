@@ -5,7 +5,6 @@ public class GameMain {
 		new DefineVoid().defineVoid(Sudoku.board);
 		new Display("SUDOKU", Sudoku.board);
 		new Display("Done", Sudoku.board);
-		System.out.println("githubƒeƒXƒg");
 	}
 
 }
