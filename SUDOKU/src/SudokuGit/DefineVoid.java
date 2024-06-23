@@ -5,7 +5,7 @@ public class DefineVoid {
 		   	int x = new java.util.Random().nextInt(9);
 		   	int y = new java.util.Random().nextInt(9);
 		   	board[x][y] = "0";
-		    
+		   	System.out.println("------------------------------");
 			String[][] test = new String[9][9];
 			for(int i = 0;i < 9;i++) {
 				for(int j = 0;j < 9;j++) {
@@ -14,7 +14,7 @@ public class DefineVoid {
 			}
 			Solve s = new Solve();
 			if(s.solve(test)) {
-				/*for(int i = 0;i < 9;i++) {
+				for(int i = 0;i < 9;i++) {
 					for(int j = 0;j < 9;j++) {
 						System.out.print (board[i][j] + "  ");
 					}
@@ -26,7 +26,7 @@ public class DefineVoid {
 						System.out.print (board[i][j] + "  ");
 					}
 					System.out.println("");
-				}*/
+				}
 				int c = 0;
 				for(int i = 0;i < 9;i++) {
 					for(int j = 0;j < 9;j++) {
