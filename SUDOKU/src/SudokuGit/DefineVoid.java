@@ -1,10 +1,10 @@
 package SudokuGit;
 
 public class DefineVoid {
+   	int a, b; 
+   	String n;
 	  public void defineVoid(String[][] board) {
-		   	int x = new java.util.Random().nextInt(9);
-		   	int y = new java.util.Random().nextInt(9);
-		   	board[x][y] = "0";
+
 		   	System.out.println("------------------------------");
 			String[][] test = new String[9][9];
 			for(int i = 0;i < 9;i++) {
@@ -14,13 +14,13 @@ public class DefineVoid {
 			}
 			Solve s = new Solve();
 			if(s.solve(test)) {
-				for(int i = 0;i < 9;i++) {
-					for(int j = 0;j < 9;j++) {
-						System.out.print (board[i][j] + "  ");
-					}
-					System.out.println("");
-				}
-				System.out.println("------------------------------");
+				int x = new java.util.Random().nextInt(9);
+			   	int y = new java.util.Random().nextInt(9);
+			   	a = x;
+				b = y;
+				n = board[a][b];
+			   	board[x][y] = "0";
+				System.out.println(n);
 				for(int i = 0;i < 9;i++) {
 					for(int j = 0;j < 9;j++) {
 						System.out.print (board[i][j] + "  ");
@@ -35,7 +35,7 @@ public class DefineVoid {
 						}
 					}
 				}
-				if(c < 40) {
+				if(c < 30) {
 					defineVoid(board);
 				}else {
 					for(int i = 0;i < 9;i++) {
@@ -45,12 +45,15 @@ public class DefineVoid {
 					}
 				}
 			}else {
-				System.out.println("false");
+				System.out.println("false" + "a,b,n" + a + "" + b + "" + n);
+				board[a][b] = n;
 				for(int i = 0;i < 9;i++) {
 					for(int j = 0;j < 9;j++) {
-						board[i][j] = Sudoku.answer[i][j];
+						System.out.print (board[i][j] + "  ");
 					}
+					System.out.println("");
 				}
+				
 				defineVoid(board);
 			}
 		}
