@@ -2,15 +2,17 @@ package SudokuGit;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
+import java.util.Arrays;
 
 import javax.swing.*;
-public class Display extends JFrame implements ActionListener, MouseListener{
+public class Display extends JFrame implements ActionListener, MouseListener, KeyListener{
 	
 	private static JTextField text = new JTextField();
 	private static ArrayList<JTextField> list = new ArrayList<>();
 	private static ArrayList<String> str1 = new ArrayList<>();
 	private static ArrayList<String> str2 = new ArrayList<>();
 	private static JButton btn;
+	static ArrayList<JTextField> field = new ArrayList<>();
 	
 	public Display(String title, String[][] board) {
 		setTitle(title);
@@ -72,6 +74,8 @@ public class Display extends JFrame implements ActionListener, MouseListener{
 		list.add(text);
 		text.setHorizontalAlignment(JTextField.CENTER);
 		text.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
+		text.addKeyListener(this);
+		field.add(text);
 	}
 	private void Button() {
 		btn = new JButton("Done!");
@@ -118,6 +122,7 @@ public class Display extends JFrame implements ActionListener, MouseListener{
 		System.out.println(option);
 		return option;
 	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		int option;
@@ -140,6 +145,16 @@ public class Display extends JFrame implements ActionListener, MouseListener{
 	public void mouseClicked(MouseEvent e) {
 		btn.doClick(10);
 	}
+	private int focusInt() {
+		return 0;
+	}
+	
+	@Override
+	public void keyPressed(KeyEvent e) {
+		if(e.getKeyCode() == 39) {
+			field.get(focusInt()).requestFocus();
+		}
+	}
 	
 	@Override
 	public void mouseReleased(MouseEvent e) {}
@@ -149,5 +164,9 @@ public class Display extends JFrame implements ActionListener, MouseListener{
 	public void mouseExited(MouseEvent e) {}
 	@Override
 	public void mousePressed(MouseEvent e) {}
+	@Override
+	public void keyTyped(KeyEvent e) {}
+	@Override
+	public void keyReleased(KeyEvent e) {}
 	
 }

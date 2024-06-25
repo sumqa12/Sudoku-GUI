@@ -35,7 +35,7 @@ public class DefineVoid {
 						}
 					}
 				}
-				if(c < 30) {
+				if(c < 43) {
 					defineVoid(board);
 				}else {
 					for(int i = 0;i < 9;i++) {
