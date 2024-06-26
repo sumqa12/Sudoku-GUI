@@ -9,10 +9,13 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	
 	private static JTextField text = new JTextField();
 	private static ArrayList<JTextField> list = new ArrayList<>();
+	private static ArrayList<JTextField> fieldList = new ArrayList<>();
 	private static ArrayList<String> str1 = new ArrayList<>();
 	private static ArrayList<String> str2 = new ArrayList<>();
 	private static JButton btn;
-	static ArrayList<JTextField> field = new ArrayList<>();
+	private static int firstVoidInt = 0, finalVoidInt = 0;
+	private static int listRow = 9;
+	private static int listCol = 9;
 	
 	public Display(String title, String[][] board) {
 		setTitle(title);
@@ -35,6 +38,19 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 			str1.add(Sudoku.answer[i][j]);
 			}
 		}
+		for(int i = 0;i < fieldList.size();i++) {
+			if(fieldList.get(i).isEnabled()) {
+				firstVoidInt = i;
+				break;
+			}
+		}
+		for(int i = fieldList.size()-1;i >= 0;i--) {
+			if(fieldList.get(i).isEnabled()) {
+				finalVoidInt = i;
+				break;
+			}
+		}
+		System.out.println("first" + firstVoidInt + "final" + finalVoidInt);
 	}
 	private void Panel(JPanel panel) {
 		
@@ -75,7 +91,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		text.setHorizontalAlignment(JTextField.CENTER);
 		text.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
 		text.addKeyListener(this);
-		field.add(text);
+		fieldList.add(text);
 	}
 	private void Button() {
 		btn = new JButton("Done!");
@@ -144,15 +160,176 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	@Override
 	public void mouseClicked(MouseEvent e) {
 		btn.doClick(10);
+		
 	}
-	private int focusInt() {
+	private int getRowInt() {
+		for(int row = 0;row < listRow;row++) {
+			for(int col = 0;col < listCol;col++) {
+				if(getFocusInt() == row * listCol + col) {
+					return row;
+				}
+			}
+		}
+		
+		
 		return 0;
 	}
+	private int getColInt() {
+		for(int row = 0;row < listRow;row++) {
+			for(int col = 0;col < listCol;col++) {
+				if(getFocusInt() == row * listCol + col) {
+					return col;
+				}
+			}
+		}
+		
+		return 0;
+	}
+	private int getRowFinalInt() {
+		int rowFinal = getRowInt() * listCol + 8;
+		for(int i = rowFinal;i >= rowFinal - 8;i--) {
+			if(fieldList.get(i).isEnabled()) {
+				rowFinal = i;
+				break;
+			}
+		}
+		return rowFinal;
+	}
+	private int getRowFirstInt() {
+		int rowFirst = getRowInt() * listCol;
+		for(int i = rowFirst;i <= rowFirst + 8;i++) {
+			if(fieldList.get(i).isEnabled()) {
+				rowFirst = i;
+				break;
+			}
+		}
+		return rowFirst;
+	}
+	private int getColFinalInt() {
+		int colFinal = getColInt() + listRow * 8;
+		for(int i = colFinal;i >= getColInt();i -= listRow) {
+			if(fieldList.get(i).isEnabled()) {
+				colFinal = i;
+				break;
+			}
+		}
+		return colFinal;
+	}
+	private int getColFirstInt() {
+		int colFirst = getColInt();
+		for(int i = colFirst;i <= colFirst + listRow * 8;i += listRow) {
+			if(fieldList.get(i).isEnabled()) {
+				colFirst= i;
+				break;
+			}
+		}
+		return colFirst;
+	}
+	private int getFocusInt() {
+		int focus = 0;
+		for(int i = 0;i <= finalVoidInt;i++) {
+			if(fieldList.get(i).hasFocus()) {
+				focus = i;
+			}
+		}
+		
+		return focus;
+	}
+	private int rightFocusInt() {
+		int focus = 0;
+		for(int i = getFocusInt() + 1;i <= getRowFinalInt();i++) {
+			if(fieldList.get(i).isEnabled()) {
+				focus = i;
+				break;
+			}
+		}
+		
+		return focus;
+	}
+	private int leftFocusInt() {
+		int focus	= 0;
+		for(int i = getFocusInt() - 1;i >= getRowFirstInt();i--) {
+			if(fieldList.get(i).isEnabled()) {
+				focus = i;
+				break;
+			}
+		}
 	
+	return focus;
+	}
+	private int downFocusInt() {
+		int focus = 0;
+		for(int i = getFocusInt() + listRow;i <= getColFinalInt();i += listRow) {
+			if(fieldList.get(i).isEnabled()) {
+				focus = i;
+				break;
+			}
+		}
+		return focus;
+	}
+	private int upFocusInt() {
+		int focus = 0;
+		for(int i = getFocusInt() - listRow;i >= getColFirstInt();i -= listRow) {
+			if(fieldList.get(i).isEnabled()) {
+				focus = i;
+				break;
+			}
+		}
+		return focus;
+	}
+	private int nextFocusInt() {
+		int focus = 0;
+		System.out.println(focus);
+		for(int i = getFocusInt()+1;i < fieldList.size();i++) {
+			if(fieldList.get(i).isEnabled()) {
+				focus = i;
+				System.out.println(focus);
+				break;
+			}
+		}
+		return focus;
+	}
 	@Override
 	public void keyPressed(KeyEvent e) {
-		if(e.getKeyCode() == 39) {
-			field.get(focusInt()).requestFocus();
+		int code = e.getKeyCode();
+		switch(code) {
+			case KeyEvent.VK_ENTER:
+				fieldList.get(getFocusInt()).setBackground(Color.WHITE);
+				fieldList.get(getFocusInt()).setEnabled(false);
+			
+				break;
+				
+			case KeyEvent.VK_RIGHT:
+				if(getFocusInt() < getRowFinalInt()) { 
+					fieldList.get(rightFocusInt()).grabFocus();
+				}else if(getFocusInt() < fieldList.size()) {
+					if(e.isShiftDown()) {
+						System.out.println("shift");
+						fieldList.get(nextFocusInt()).grabFocus();
+					}
+				}
+				break;
+			
+			case KeyEvent.VK_LEFT:
+				if(getFocusInt() > getRowFirstInt()) {
+					fieldList.get(leftFocusInt()).grabFocus();
+				}
+			
+				break;
+			
+			case KeyEvent.VK_UP:
+				if(getFocusInt() > getColFirstInt()) {
+					fieldList.get(upFocusInt()).grabFocus();
+				}
+				
+				break;
+				
+			case KeyEvent.VK_DOWN:
+				if(getFocusInt() < getColFinalInt()) {
+					fieldList.get(downFocusInt()).grabFocus();
+				}
+				
+			default: break;
 		}
 	}
 	
