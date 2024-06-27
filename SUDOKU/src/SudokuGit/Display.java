@@ -50,6 +50,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 				break;
 			}
 		}
+		fieldList.get(firstVoidInt).grabFocus();
 		System.out.println("first" + firstVoidInt + "final" + finalVoidInt);
 	}
 	private void Panel(JPanel panel) {
@@ -154,6 +155,9 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 			Dialog("不正解!", "残念、、、" );
 			
 		}
+		
+	}
+	public void TimeCnt() {
 		
 	}
 	
@@ -302,10 +306,14 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 			case KeyEvent.VK_RIGHT:
 				if(getFocusInt() < getRowFinalInt()) { 
 					fieldList.get(rightFocusInt()).grabFocus();
-				}else if(getFocusInt() < fieldList.size()) {
+				}else if(getFocusInt() < finalVoidInt+1) {
 					if(e.isShiftDown()) {
-						System.out.println("shift");
-						fieldList.get(nextFocusInt()).grabFocus();
+						if(getFocusInt() == finalVoidInt) {
+							fieldList.get(firstVoidInt).grabFocus();
+						}else {
+							System.out.println("shift");
+							fieldList.get(nextFocusInt()).grabFocus();
+						}
 					}
 				}
 				break;
