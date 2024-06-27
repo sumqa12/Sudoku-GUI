@@ -1,17 +1,13 @@
 package SudokuGit;
 
+import javafx.util.Duration;
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-import javafx.application.Application;
 
-/*public class Watch extends Application{
-	/*public void Watch() {
-		
-		Application.launch(Watch.class);
-	}
+public class Watch extends Application{
 	
 	@Override
 	public void start(Stage arg0) throws Exception {
@@ -35,8 +31,21 @@ import javafx.application.Application;
 			
 			stopwatch.action();
 		});
-		stage.setScene(new Scene(new HBox(stopwatch, start)));
+		//リセットボタン
+	    final Button reset = new Button("リセット");
+
+	    //リセットボタン押下時のイベント
+	    reset.setOnAction(e -> {
+
+	      //ストップウォッチをリセット
+	      stopwatch.reset();
+	    });
+		stage.setScene(new Scene(new HBox(stopwatch, new HBox(start, reset))));
 		
 		stage.show();
 	}
-}*/
+	
+	public static void watch(Duration d) {
+		
+	}
+}

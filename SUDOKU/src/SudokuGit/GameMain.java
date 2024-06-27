@@ -1,4 +1,5 @@
 package SudokuGit;
+import javafx.application.Application;
 class GameMain{
 	
 	public static void main(String[] args) {
@@ -6,8 +7,8 @@ class GameMain{
 		new DefineVoid().defineVoid(Sudoku.board);
 		new Display("SUDOKU", Sudoku.board);
 		new Display("Done", Sudoku.board);
-		//new Watch();
 		
+		Application.launch(Watch.class);
 	}
 
 	
