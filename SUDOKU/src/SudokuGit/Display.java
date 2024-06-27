@@ -19,14 +19,14 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	
 	public Display(String title, String[][] board) {
 		setTitle(title);
-		setBounds(getx(title),250,getxSize(title),getySize(title));
+		setBounds(getx(title),gety(title),getxSize(title),getySize(title));
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		JPanel panel = new JPanel();
 		if(title.equals("SUDOKU") || title.equals("SOLUTION")){
 			Panel(panel);
 			boardPaste(board, panel);
 			add(panel, BorderLayout.CENTER);
-		}else {
+		}else{
 			setResizable(false);
 			Button();
 			panel.add(btn);
@@ -111,11 +111,18 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	}
 	private int getx(String title) {
 		if(title.equals("SUDOKU")) {
-			return 500;
+			return 450;
 		}else if(title.equals("SOLUTION")){
-			return 1050;
+			return 1000;
 		}else {
-			return 300;
+			return 260;
+		}
+	}
+	private int gety(String title) {
+		if(title.equals("StopWatch")) {
+			return 100;
+		}else {
+			return 250;
 		}
 	}
 	private int getxSize(String title) {
@@ -142,6 +149,11 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	
 	@Override
 	public void actionPerformed(ActionEvent e) {
+		
+		if(Watch.stopwatch.isActive()) {
+			Watch.start.setText("result");
+			Watch.start.fire();
+		}
 		int option;
 		list.forEach(s-> str2.add(s.getText()));
 		Verifying V = new Verifying();
@@ -155,9 +167,6 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 			Dialog("不正解!", "残念、、、" );
 			
 		}
-		
-	}
-	public void TimeCnt() {
 		
 	}
 	

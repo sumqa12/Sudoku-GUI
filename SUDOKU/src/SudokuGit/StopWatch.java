@@ -1,6 +1,5 @@
 package SudokuGit;
 
-import javax.swing.JPanel;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.beans.property.SimpleStringProperty;
@@ -8,6 +7,7 @@ import javafx.beans.property.StringProperty;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.control.Label;
+import javafx.scene.text.*;
 import javafx.util.Duration;
 
 public class StopWatch extends Label{
@@ -19,12 +19,9 @@ public class StopWatch extends Label{
 	
 	public StopWatch() {
 		
+		setFont(new Font("Arial", 40));
 		textProperty().bind(stringProperty);
-		
 		reset();
-		JPanel panel = new JPanel();
-		panel.setBounds(100, 100, 70, 70);
-		panel.setVisible(active);
 	}
 	public void action() {
 		if(active) {
@@ -45,16 +42,16 @@ public class StopWatch extends Label{
 					public void handle(ActionEvent e) {
 						
 						Duration d = ((KeyFrame) e.getSource()).getTime();
-						
-						System.out.println(time);
-						
 						time = time.add(d);
+						stringProperty.set(String.valueOf(time.toSeconds()));
+						
+						
 					}
 				}
 				
 				EventHandlerStopWatch ehsw = new EventHandlerStopWatch();
 				
-				timeline = new Timeline(new KeyFrame(Duration.seconds(1), ehsw));
+				timeline = new Timeline(new KeyFrame(Duration.seconds(0.01), ehsw));
 			}
 			
 			timeline.setCycleCount(Timeline.INDEFINITE);
