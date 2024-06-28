@@ -13,7 +13,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	private static ArrayList<String> str1 = new ArrayList<>();
 	private static ArrayList<String> str2 = new ArrayList<>();
 	private static JButton btn;
-	private static int firstVoidInt = 0, finalVoidInt = 0;
+	private static int firstVoidInt = 0;
+	private static int finalVoidInt = 0;
 	private static int listRow = 9;
 	private static int listCol = 9;
 	
@@ -38,20 +39,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 			str1.add(Sudoku.answer[i][j]);
 			}
 		}
-		for(int i = 0;i < fieldList.size();i++) {
-			if(fieldList.get(i).isEnabled()) {
-				firstVoidInt = i;
-				break;
-			}
-		}
-		for(int i = fieldList.size()-1;i >= 0;i--) {
-			if(fieldList.get(i).isEnabled()) {
-				finalVoidInt = i;
-				break;
-			}
-		}
-		fieldList.get(firstVoidInt).grabFocus();
-		System.out.println("first" + firstVoidInt + "final" + finalVoidInt);
+		fieldList.get(firstVoidInt()).grabFocus();
+		System.out.println("first" + firstVoidInt() + "final" + finalVoidInt());
 	}
 	private void Panel(JPanel panel) {
 		
@@ -240,7 +229,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	}
 	private int getFocusInt() {
 		int focus = 0;
-		for(int i = 0;i <= finalVoidInt;i++) {
+		for(int i = 0;i <= finalVoidInt();i++) {
 			if(fieldList.get(i).hasFocus()) {
 				focus = i;
 			}
@@ -292,11 +281,19 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	}
 	private int nextFocusInt() {
 		int focus = 0;
-		System.out.println(focus);
 		for(int i = getFocusInt()+1;i < fieldList.size();i++) {
 			if(fieldList.get(i).isEnabled()) {
 				focus = i;
-				System.out.println(focus);
+				break;
+			}
+		}
+		return focus;
+	}
+	private int backFocusInt() {
+		int focus = 0;
+		for(int i = getFocusInt()-1;i > -1;i--) {
+			if(fieldList.get(i).isEnabled()) {
+				focus = i;
 				break;
 			}
 		}
@@ -305,49 +302,105 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	@Override
 	public void keyPressed(KeyEvent e) {
 		int code = e.getKeyCode();
+		int firi = firstVoidInt();
+		int fini = finalVoidInt();
+		int gi = getFocusInt();
+		int grfiri = getRowFirstInt();
+		int grfini = getRowFinalInt();
+		int gcfiri = getColFirstInt();
+		int gcfini = getColFinalInt();
+		int ri = rightFocusInt();
+		int li = leftFocusInt();
+		int ui = upFocusInt();
+		int di = downFocusInt();
+		int ni = nextFocusInt();
+		int bi = backFocusInt();
 		switch(code) {
 			case KeyEvent.VK_ENTER:
-				fieldList.get(getFocusInt()).setBackground(Color.WHITE);
-				fieldList.get(getFocusInt()).setEnabled(false);
-			
+				if(!(fieldList.get(gi).getText().equals(""))) {
+				fieldList.get(gi).setBackground(Color.WHITE);
+				fieldList.get(gi).setEnabled(false);
+				}
 				break;
 				
 			case KeyEvent.VK_RIGHT:
-				if(getFocusInt() < getRowFinalInt()) { 
-					fieldList.get(rightFocusInt()).grabFocus();
-				}else if(getFocusInt() < finalVoidInt+1) {
+				if(gi < grfini) { 
+					System.out.print(gi + "->");
+					System.out.println(ri);
+					fieldList.get(ri).grabFocus();
+				}else if(gi < fini+1) {
 					if(e.isShiftDown()) {
-						if(getFocusInt() == finalVoidInt) {
-							fieldList.get(firstVoidInt).grabFocus();
+						if(gi == fini) {
+							System.out.print(gi + "->");
+							System.out.println(firi);
+							fieldList.get(firi).grabFocus();
 						}else {
-							System.out.println("shift");
-							fieldList.get(nextFocusInt()).grabFocus();
+							System.out.print(gi + "->");
+							System.out.println(ni);
+							fieldList.get(ni).grabFocus();
 						}
 					}
 				}
+				
 				break;
 			
 			case KeyEvent.VK_LEFT:
-				if(getFocusInt() > getRowFirstInt()) {
-					fieldList.get(leftFocusInt()).grabFocus();
+				if(gi > grfiri) {
+					System.out.print(gi + "->");
+					System.out.println(li);
+					fieldList.get(li).grabFocus();
+				}else if(gi > firi-1) {
+					if(e.isShiftDown()) {
+						if(gi == firi) {
+							System.out.print(gi + "->");
+							System.out.println(fini);
+							fieldList.get(fini).grabFocus();
+						}else {
+							System.out.print(gi + "->");
+							System.out.println(bi);
+							fieldList.get(bi).grabFocus();
+						}
+					}
 				}
-			
+				
 				break;
 			
 			case KeyEvent.VK_UP:
-				if(getFocusInt() > getColFirstInt()) {
-					fieldList.get(upFocusInt()).grabFocus();
+				if(gi > gcfiri) {
+					System.out.print(gi + "->");
+					System.out.println(ui);
+					fieldList.get(ui).grabFocus();
 				}
 				
 				break;
 				
 			case KeyEvent.VK_DOWN:
-				if(getFocusInt() < getColFinalInt()) {
-					fieldList.get(downFocusInt()).grabFocus();
+				if(gi < gcfini) {
+					System.out.print(gi + "->");
+					System.out.println(di);
+					fieldList.get(di).grabFocus();
 				}
 				
 			default: break;
 		}
+	}
+	private int finalVoidInt() {
+		for(int i = fieldList.size()-1;i >= 0;i--) {
+			if(fieldList.get(i).isEnabled()) {
+				finalVoidInt = i;
+				break;
+			}
+		}
+		return finalVoidInt;
+	}
+	private int firstVoidInt() {
+		for(int i = 0;i < fieldList.size();i++) {
+			if(fieldList.get(i).isEnabled()) {
+				firstVoidInt = i;
+				break;
+			}
+		}
+		return firstVoidInt;
 	}
 	
 	@Override
