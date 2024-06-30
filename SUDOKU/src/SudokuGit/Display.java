@@ -15,8 +15,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	private static JButton btn;
 	private static int firstVoidInt = 0;
 	private static int finalVoidInt = 0;
-	private static int listRow = 9;
-	private static int listCol = 9;
+	public static int listRow = 9;
+	public static int listCol = 9;
 	
 	public Display(String title, String[][] board) {
 		setTitle(title);
@@ -34,8 +34,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 			add(panel, BorderLayout.CENTER);
 		}
 		setVisible(true);
-		for(int i = 0;i < 9;i++) {
-			for(int j = 0;j < 9;j++) {
+		for(int i = 0;i < listRow;i++) {
+			for(int j = 0;j < listCol;j++) {
 			str1.add(Sudoku.answer[i][j]);
 			}
 		}
@@ -44,7 +44,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	}
 	private void Panel(JPanel panel) {
 		
-		panel.setLayout(new GridLayout(9,9));
+		panel.setLayout(new GridLayout(listRow,listCol));
 		panel.setBackground(Color.BLACK);
 		panel.addMouseListener(new MouseAdapter() {
 			@Override
@@ -56,8 +56,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	}
 	private void boardPaste(String[][] board, JPanel panel) {
 		int cnt = 0;
-		for(int i = 0;i < 9;i++) {
-			for(int j = 0;j < 9;j++) {
+		for(int i = 0;i < listRow;i++) {
+			for(int j = 0;j < listCol;j++) {
 				text = new JTextField();
 				Text(board, i, j, cnt);
 				highLight(cnt);
@@ -69,6 +69,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		
 	}
 	private void Text(String[][] board, int i, int j, int cnt) {
+		int txtSize = 40;
 		if(board[i][j].equals("0")) {
 			text.setText("");
 			text.setBackground(Color.LIGHT_GRAY);
@@ -79,16 +80,18 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		}
 		list.add(text);
 		text.setHorizontalAlignment(JTextField.CENTER);
-		text.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
+		text.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, txtSize));
 		text.addKeyListener(this);
 		fieldList.add(text);
 	}
 	private void Button() {
+		int txtSize = 30;
+		int btnDim = 150;
 		btn = new JButton("Done!");
 		btn.setContentAreaFilled(false);
 		btn.addActionListener(this);
-		btn.setPreferredSize(new Dimension(150, 150));
-		btn.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 30));
+		btn.setPreferredSize(new Dimension(btnDim, btnDim));
+		btn.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, txtSize));
 	}
 	private void highLight(int cnt) {
 		if(str1.size() != 0) {
@@ -99,38 +102,52 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		
 	}
 	private int getx(String title) {
+		int x;
 		if(title.equals("SUDOKU")) {
-			return 450;
+			x = 450;
+			return x;
 		}else if(title.equals("SOLUTION")){
-			return 1000;
+			x = 1000;
+			return x;
 		}else {
-			return 260;
+			x = 260;
+			return x;
 		}
 	}
 	private int gety(String title) {
+		int y;
 		if(title.equals("StopWatch")) {
-			return 100;
+			y = 100;
+			return y;
 		}else {
-			return 250;
+			y = 250;
+			return y;
 		}
 	}
 	private int getxSize(String title) {
+		int xSize;
 		if(title.equals("Done")) {
-			return 200;
+			xSize = 200;
+			return xSize;
 		}else {
-			return 550;
+			xSize = 550;
+			return xSize;
 		}
 	}
 	private int getySize(String title) {
+		int ySize;
 		if(title.equals("Done")) {
-			return 200;
+			ySize = 200;
+			return ySize;
 		}else {
-			return 550;
+			ySize = 550;
+			return ySize;
 		}
 	}
 	private int Dialog(String txt, String title) {
+		int txtSize = 40;
 		JLabel label = new JLabel(txt);
-		label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, 40));
+		label.setFont(new Font(Font.DIALOG_INPUT, Font.BOLD, txtSize));
 		int option = JOptionPane.showConfirmDialog(label, txt, title, JOptionPane.DEFAULT_OPTION, JOptionPane.INFORMATION_MESSAGE);
 		System.out.println(option);
 		return option;
@@ -161,7 +178,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	
 	@Override
 	public void mouseClicked(MouseEvent e) {
-		btn.doClick(10);
+		int pressTime = 10;
+		btn.doClick(pressTime);
 		
 	}
 	private int getRowInt() {

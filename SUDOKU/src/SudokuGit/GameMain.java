@@ -7,7 +7,6 @@ class GameMain{
 		new DefineVoid().defineVoid(Sudoku.board);
 		new Display("SUDOKU", Sudoku.board);
 		new Display("Done", Sudoku.board);
-		
 		Application.launch(Watch.class);
 	}
 

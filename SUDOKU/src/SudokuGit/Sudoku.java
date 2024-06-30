@@ -67,8 +67,8 @@ public class Sudoku {
 	      Collections.shuffle(list);
 	    }
 	    
-	    for(int i = 0;i < 9;i++) {
-	    	for(int j = 0;j < 9;j++) {
+	    for(int i = 0;i < Display.listRow;i++) {
+	    	for(int j = 0;j < Display.listCol;j++) {
 	    		answer[i][j] = board[i][j];
 	    		
 	    	}

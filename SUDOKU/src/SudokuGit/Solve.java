@@ -17,7 +17,7 @@ public class Solve {
         int row = emptySpot[0];
         int col = emptySpot[1];
         int cnt = 0, num = 0;
-        for (int trynum = 1; trynum <= 9 ; trynum++) {
+        for (int trynum = 1; trynum <= board.length; trynum++) {
         	//もしnumが現在の列、行、3*3のグリッドになかったら
             if (isSafe(board, row, col, Integer.toString(trynum))) {
             	c++;
