@@ -22,7 +22,10 @@ public class Verifying {
 		}
 		int n = 1;
 		for(int i = 0;i < boardCnt;i++) {
-			System.out.print(board.get(i) + "  ");
+			System.out.print(board.get(i));
+			if(board.get(i).equals(""))	System.out.print("   ");
+			else	System.out.print("  ");
+			
 			if(n % Display.listCol == 0) {
 				System.out.println();
 			}

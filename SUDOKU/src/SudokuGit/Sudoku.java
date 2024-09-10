@@ -13,9 +13,13 @@ public class Sudoku {
 	  
 	  public static String[][] board = new String[9][9];
 	  public static String[][] answer = new String[9][9];
-
+	  
+	  public Sudoku() {
+		  MakeSudoku();
+	  }
+	  
 	  /** ”“Æ‚Ìì¬ */
-	  public void MakeSudoku() {
+	  private void MakeSudoku() {
 	    for (int i = 1; i <= 9; i++) {
 	      list.add(Integer.toString(i));
 	    }
