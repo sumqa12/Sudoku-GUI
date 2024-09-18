@@ -6,6 +6,7 @@ public class DefineVoid {
    	
    	public DefineVoid() {
    		defineVoid(Sudoku.board);
+   		new Verifying().showBoard(Sudoku.board);
    	}
 	  private void defineVoid(String[][] board) {
 		  

@@ -7,6 +7,7 @@ import java.util.Arrays;
 import javax.swing.*;
 public class Display extends JFrame implements ActionListener, MouseListener, KeyListener{
 	
+	private static final int MAXLEN = 1;
 	private static JTextField text = new JTextField();
 	private static ArrayList<JTextField> list = new ArrayList<>();
 	private static ArrayList<JTextField> fieldList = new ArrayList<>();
@@ -339,7 +340,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 				fieldList.get(gi).setBackground(Color.WHITE);
 				fieldList.get(gi).setEnabled(false);
 				}
-				break;
+				
+			break;
 				
 			case KeyEvent.VK_RIGHT:
 				if(gi < grfini) { 
@@ -360,7 +362,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 					}
 				}
 				
-				break;
+			break;
 			
 			case KeyEvent.VK_LEFT:
 				if(gi > grfiri) {
@@ -381,7 +383,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 					}
 				}
 				
-				break;
+			break;
 			
 			case KeyEvent.VK_UP:
 				if(gi > gcfiri) {
@@ -390,7 +392,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 					fieldList.get(ui).grabFocus();
 				}
 				
-				break;
+			break;
 				
 			case KeyEvent.VK_DOWN:
 				if(gi < gcfini) {
@@ -399,9 +401,34 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 					fieldList.get(di).grabFocus();
 				}
 				
+			break;
+				
 			default: break;
 		}
 	}
+	
+	@Override
+	public void keyReleased(KeyEvent e) {
+		int code = e.getKeyCode();
+		int gi = getFocusInt();
+		int num;
+		String text = fieldList.get(gi).getText();
+		if(text.length() >= MAXLEN) {
+			text = text.substring(0, MAXLEN);
+			fieldList.get(gi).setText(text);
+		}
+		try {
+			num = Integer.parseInt(text);
+		}catch(NumberFormatException nfe) {
+			if(!(	code == KeyEvent.VK_RIGHT ||
+					code == KeyEvent.VK_LEFT ||
+					code == KeyEvent.VK_UP ||
+					code == KeyEvent.VK_DOWN
+				))	fieldList.get(gi).setText("");
+		}
+		
+	}
+	
 	private int finalVoidInt() {
 		for(int i = fieldList.size()-1;i >= 0;i--) {
 			if(fieldList.get(i).isEnabled()) {
@@ -430,8 +457,8 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	@Override
 	public void mousePressed(MouseEvent e) {}
 	@Override
-	public void keyTyped(KeyEvent e) {}
-	@Override
-	public void keyReleased(KeyEvent e) {}
+	public void keyTyped(KeyEvent e) {
+		
+	}
 	
 }
