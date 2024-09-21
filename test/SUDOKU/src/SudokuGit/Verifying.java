@@ -7,18 +7,18 @@ public class Verifying {
 		showBoard(str1, 2);
 		for(int i = 0;i < boardCnt;i++) {
 		if(!(str1.get(i).equals(str2.get(i)))) {
-				System.out.println("�c�O�I");
+				System.out.println("残念!");
 				return false;
 			}
 		}
-		System.out.println("���߂łƂ��I");
+		System.out.println("おめでとう!");
 		return true;
 	}
 	public void showBoard(ArrayList<String> board, int c) {
 		if(c == 1) {
-		System.out.println("���Ȃ�");
+		System.out.println("あなた");
 		}else {
-			System.out.println("����");
+			System.out.println("答え");
 		}
 		int n = 1;
 		for(int i = 0;i < boardCnt;i++) {
