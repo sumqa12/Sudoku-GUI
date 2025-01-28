@@ -1,8 +1,7 @@
-package SudokuGit;
+package sudoku.game.src;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.ArrayList;
-import java.util.Arrays;
 
 import javax.swing.*;
 public class Display extends JFrame implements ActionListener, MouseListener, KeyListener{
@@ -60,7 +59,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		for(int i = 0;i < listRow;i++) {
 			for(int j = 0;j < listCol;j++) {
 				text = new JTextField();
-				Text(board, i, j, cnt);
+				Text(board, i, j);
 				highLight(cnt);
 				panel.add(text);
 				cnt++;
@@ -69,7 +68,7 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		}
 		
 	}
-	private void Text(String[][] board, int i, int j, int cnt) {
+	private void Text(String[][] board, int i, int j) {
 		int txtSize = 40;
 		if(board[i][j].equals("0")) {
 			text.setText("");
@@ -165,13 +164,13 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 		list.forEach(s-> str2.add(s.getText()));
 		Verifying V = new Verifying();
 		if(V.Verifying(str1, str2)) {
-			option = Dialog("正解!", "おめでとう!");
+			option = Dialog("螳檎挑!", "縺翫ａ縺ｧ縺ｨ縺�");
 			if(option == JOptionPane.YES_OPTION) {
 				System.exit(0);
 			}
 		}else {
 			new Display("SOLUTION", Sudoku.answer);
-			Dialog("不正解!", "残念、、、" );
+			Dialog("谿句ｿｵ!", "邨先棡" );
 			
 		}
 		
@@ -411,14 +410,13 @@ public class Display extends JFrame implements ActionListener, MouseListener, Ke
 	public void keyReleased(KeyEvent e) {
 		int code = e.getKeyCode();
 		int gi = getFocusInt();
-		int num;
 		String text = fieldList.get(gi).getText();
 		if(text.length() >= MAXLEN) {
 			text = text.substring(0, MAXLEN);
 			fieldList.get(gi).setText(text);
 		}
 		try {
-			num = Integer.parseInt(text);
+			Integer.parseInt(text);
 		}catch(NumberFormatException nfe) {
 			if(!(	code == KeyEvent.VK_RIGHT ||
 					code == KeyEvent.VK_LEFT ||

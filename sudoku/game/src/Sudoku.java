@@ -1,14 +1,14 @@
-package SudokuGit;
+package sudoku.game.src;
 import java.util.*;
 public class Sudoku {
 
-	/** 1‚©‚ç9‚Ü‚Å‚ğŠi”[‚·‚éboardList */
+	/** 1ï¿½ï¿½ï¿½ï¿½9ï¿½Ü‚Å‚ï¿½ï¿½iï¿½[ï¿½ï¿½ï¿½ï¿½boardList */
 	  List<String> list = new ArrayList<String>();
 
-	  /** d•¡ƒ`ƒFƒbƒN—p‚ÌhashSet1 */
+	  /** ï¿½dï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½Nï¿½pï¿½ï¿½hashSet1 */
 	  Set<String> hashSet1 = new HashSet<>();
 
-	  /** d•¡ƒ`ƒFƒbƒN—p‚ÌhashSet2 */
+	  /** ï¿½dï¿½ï¿½ï¿½`ï¿½Fï¿½bï¿½Nï¿½pï¿½ï¿½hashSet2 */
 	  Set<String> hashSet2 = new HashSet<>();
 	  
 	  public static String[][] board = new String[9][9];
@@ -18,7 +18,7 @@ public class Sudoku {
 		  MakeSudoku();
 	  }
 	  
-	  /** ”“Æ‚Ìì¬ */
+	  /** ï¿½ï¿½ï¿½Æ‚Ìì¬ */
 	  private void MakeSudoku() {
 	    for (int i = 1; i <= 9; i++) {
 	      list.add(Integer.toString(i));

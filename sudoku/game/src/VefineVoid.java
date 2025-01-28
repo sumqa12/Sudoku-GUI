@@ -1,10 +1,10 @@
-package SudokuGit;
+package sudoku.game.src;
 
-public class DefineVoid {
+public class VefineVoid {
    	int a, b; 
    	String n;
    	
-   	public DefineVoid() {
+   	public VefineVoid() {
    		defineVoid(Sudoku.board);
    		new Verifying().showBoard(Sudoku.board);
    	}

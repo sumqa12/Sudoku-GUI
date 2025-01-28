@@ -1,0 +1,16 @@
+{
+    "java.project.sourcePaths": [
+        "."
+    ],
+    "java.project.outputPath": "sudoku/game/bin",
+    "java.project.referencedLibraries": [
+        "sudoku/lib/javafx.base.jar",
+        "sudoku/lib/javafx.controls.jar",
+        "sudoku/lib/javafx.fxml.jar",
+        "sudoku/lib/javafx.graphics.jar",
+        "sudoku/lib/javafx.media.jar",
+        "sudoku/lib/javafx.swing.jar",
+        "sudoku/lib/javafx.web.jar",
+        "sudoku/lib/javafx-swt.jar"
+    ]
+}
