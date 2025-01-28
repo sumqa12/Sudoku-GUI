@@ -11,7 +11,6 @@
             "name": "Javaアプリケーションの起動",
             "mainClass": "sudoku.game.src.GameMain",
             "args": [],
-            "projectName": "sudoku_a8e46428",
         }
-    ]
+    ] 
 }

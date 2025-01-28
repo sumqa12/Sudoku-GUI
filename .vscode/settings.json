@@ -2,15 +2,14 @@
     "java.project.sourcePaths": [
         "."
     ],
-    "java.project.outputPath": "sudoku/game/bin",
     "java.project.referencedLibraries": [
-        "sudoku/lib/javafx.base.jar",
-        "sudoku/lib/javafx.controls.jar",
-        "sudoku/lib/javafx.fxml.jar",
-        "sudoku/lib/javafx.graphics.jar",
-        "sudoku/lib/javafx.media.jar",
-        "sudoku/lib/javafx.swing.jar",
-        "sudoku/lib/javafx.web.jar",
-        "sudoku/lib/javafx-swt.jar"
-    ]
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx-swt.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.base.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.media.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.swing.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.web.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.fxml.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.graphics.jar",
+        "c:\\Users\\user\\Documents\\git\\Sudoku-GUI\\sudoku\\lib\\javafx.controls.jar"
+    ],
 }
